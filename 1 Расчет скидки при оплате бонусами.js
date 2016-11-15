@@ -1,4 +1,5 @@
 ﻿function FuncAct(AO, RO, CO) {
+	// test git
 	var bonusCardIndex = 0;
 	//**** проверка на введенную бонусную карту
 	for (RO.Card.Index = 1; RO.Card.Index <= RO.Card.Count; RO.Card.Index ++) {
