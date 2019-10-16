@@ -1,0 +1,790 @@
+openapi: 3.0.0
+info:
+  description: AccountingSuite v2 API
+  version: 2.0.1
+  title: AccountingSuite v2 API
+servers: 
+  - url: https://apps7.accountingsuite.com/a/{tenantNumber}/hs/v2/
+    description: ACS production server
+    variables:
+      tenantNumber:
+        default: none
+        description: Tenant number assigned by ACS
+  - url: https://apps7.accountingsuite.com/SANDBOX/{tenantNumber}/hs/v2/
+    description: ACS sandbox server
+    variables:
+      tenantNumber:
+        default: none
+        description: Tenant number assigned by ACS Sandbox
+  - url: https://apps9.accountingsuite.com/ACS_DEV/{tenantNumber}/hs/v2/
+    description: ACS dev server
+    variables:
+      tenantNumber:
+        default: none
+        description: Tenant number assigned by ACS Sandbox 
+  - url: https://apps9.accountingsuite.com/ACS_BETA/{tenantNumber}/hs/v2/
+    description: ACS beta server
+    variables:
+      tenantNumber:
+        default: none
+        description: Tenant number assigned by ACS Sandbox                  
+paths:
+  /accounts:
+    get:
+      summary: 'Returns a list of Accounts from Chart of Accounts'
+      tags:
+        - accounts
+      parameters:
+        - in: query
+          name: ID
+          schema:
+            type: string
+          required: false
+          description: List of IDs for the Accounts to get; one or more divided by commas
+          example: ID1,ID2,ID3
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+    post:
+      summary: Create new Accounts or change existing ones
+      tags:
+        - accounts      
+      description: "Creates a list of Accounts"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+      responses:
+        '200':
+          description: Accounts created/changed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+
+  /bills:
+    get:
+      summary: 'Returns a list of Bills'
+      tags:
+        - bills
+      parameters:
+        - in: query
+          name: ID
+          schema:
+            type: string
+          required: false
+          description: List of IDs for the Bills to get; one or more divided by commas
+          example: ID1,ID2,ID3
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bill'
+    post:
+      summary: Create new Bills or change existing ones
+      tags:
+        - bills      
+      description: "Creates a list of Bills"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Bill'
+      responses:
+        '200':
+          description: Bills created/changed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bill'                
+
+  /companies:
+    get:
+      summary: 'Returns a list of Companies'
+      tags:
+        - companies
+      parameters:
+        - in: query
+          name: ID
+          schema:
+            type: string
+          required: false
+          description: List of IDs for the Companies to get; one or more divided by commas
+          example: ID1,ID2,ID3
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+    post:
+      summary: Create new Company or change existing ones
+      tags:
+        - companies      
+      description: "Creates a list of Companies"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+      responses:
+        '200':
+          description: Companies created/changed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company' 
+
+  /currencies:
+    get:
+      summary: 'Returns a list of Currencies'
+      tags:
+        - currencies
+      parameters:
+        - in: query
+          name: ID
+          schema:
+            type: string
+          required: false
+          description: List of IDs for the Currencies to get; one or more divided by commas
+          example: ID1,ID2,ID3
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Currency'
+    post:
+      summary: Create new Currency or change existing ones
+      tags:
+        - currencies      
+      description: "Creates a list of Currencies"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Currency'
+      responses:
+        '200':
+          description: Currencies created/changed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Currency'                                
+
+  /invoices:
+    get:
+      summary: 'Returns a list of invoices'
+      tags:
+        - invoices
+      parameters:
+        - in: query
+          name: ID
+          schema:
+            type: string
+          required: false
+          description: List of IDs for the invoices to get; one or more divided by commas
+          example: ID1,ID2,ID3
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+    post:
+      summary: Create and post new invoices or change existing ones
+      tags:
+        - invoices      
+      description: "Creates a list of invoices"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Invoice'
+      responses:
+        '200':
+          description: Invoice created/changed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+
+  /items:
+    get:
+      summary: 'Returns a list of Items'
+      tags:
+        - items      
+      parameters:
+        - in: query
+          name: ID
+          schema:
+            type: string
+          required: false
+          description: List of IDs for the Items to get; one or more divided by commas
+          example: ID1,ID2,ID3
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+    post:
+      summary: Create new Items or change existing ones
+      tags:
+        - items      
+      description: "Creates a list of Items"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '200':
+          description: Items created/changed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item' 
+
+  /locations:
+    get:
+      summary: 'Returns a list of Locations'
+      tags:
+        - locations      
+      parameters:
+        - in: query
+          name: ID
+          schema:
+            type: string
+          required: false
+          description: List of IDs for the Locations to get; one or more divided by commas
+          example: ID1,ID2,ID3
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+    post:
+      summary: Create new Locations or change existing ones
+      tags:
+        - locations      
+      description: "Creates a list of Locations"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+      responses:
+        '200':
+          description: Location created/changed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'                
+
+security:
+  - basicAuth: []
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+
+  schemas:
+    Account:
+      type: object
+      description: full representation of an Account
+      properties:
+        ID:
+          type: 'string'
+          description: 'The unique identifier generated by AccountingSuite.'
+          example: '71206de7-0ceb-4165-912b-1dc7561c72a8'      
+        Number:
+          type: 'string'
+          description: Code of the Account
+          example: '1003'
+        Name:
+          type: 'string'
+          description: 'Name of Account'
+          example: "Accounts Payable"          
+        LastModifiedDate:
+          type: 'string'
+          format: 'date-time'
+          example: '2018-01-01T11:00:00Z'
+          description: 'Date and time in UTC of the last change of the Account, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. Attribute is filled automatically.'
+        Type:  
+          type: string 
+          description: Account types
+          enum:
+            - Bank
+            - Inventory
+            - Accounts receivable
+            - Other current asset
+            - Fixed asset
+            - Accumulated depriciation
+            - Other noncurrent asset
+            - Other current liability
+            - Accounts Payable
+            - Long term liability
+            - Equity
+            - Sales
+            - Cost of sales
+            - Expense
+            - Other income
+            - Other expense
+            - Income tax expense
+        Parent:
+          $ref: "#/components/schemas/AccountRef"
+        Memo:
+          type: string
+          description: Notes for the Account
+          example: Main Payable Account, use it if no other available
+        URL:
+          type: string
+          description: URL link to a source Account 
+          example: https://apps7.accountingsuite.com/a/1103018/#e1cib/data/ChartOfAccounts.ChartOfAccounts?ref=80db0cc47ac0d6e311e8ccb441a651a4
+
+    AccountRef:
+      type: object
+      description: short representation of an Account
+      properties:
+        ID:
+          type: 'string'
+          description: 'The unique identifier generated by AccountingSuite.'
+          example: '71206de7-0ceb-4165-912b-1dc7561c72a8'      
+        Number:
+          type: 'string'
+          example: '1003'
+        Name:
+          type: 'string'
+          description: 'Name of Account'
+          example: "Accounts Payable"
+
+    Address:
+      type: object
+      properties:
+        ID:
+          type: 'string'
+          description: 'The unique identifier generated by AccountingSuite.'
+          example: '71206de7-0ceb-4165-912b-1dc7561c72a8'
+        Name:
+          type: 'string'
+          description: 'Full name of Contact / Address'
+          example: "Jane Thompson's default address"
+        AddressLine1:
+          type: 'string'
+          example: 'Germany, Berlin'
+        AddressLine2:
+          type: 'string'
+          example: 'Elm Street, 18a'
+        AddressLine3:
+          type: 'string'
+          example: 'Second entrance from left side'
+        FirstName:
+          type: 'string'
+          example: 'Jane'
+        MiddleName:
+          type: 'string'
+          example: 'Anne'        
+        LastName:
+          type: 'string'
+          example: 'Thompson'
+        City:
+          type: 'string'
+          example: 'Berlin'
+        State:
+          type: 'string'
+          example: 'Berlin'      
+        Country:
+          type: 'string'
+          example: 'Germany'        
+        ZIP:
+          type: 'string'
+          example: '12345'
+        Phone:
+          type: 'string'
+          example: '(555) 754-3010'
+        Cell:
+          type: 'string'
+          example: '555-754-3010'
+        Fax:
+          type: 'string'
+          example: '001-555-754-3010'
+        Email:
+          type: 'string'
+          format: email
+          example: 'janethompson@example.com'
+        URL:
+          type: string
+          description: URL link to a source Address 
+          example: https://apps7.accountingsuite.com/a/1103018/#e1cib/data/Catalog.Addresses?ref=80db0cc47ac0d6e311e8cae1b493be2c
+
+    Bill:
+      type: object
+      properties:
+        BillNumber:
+          type: 'string'
+          description: The "BillNumber" attribute is populated automatically if not supplied
+          example: '1001'
+        ID:
+          type: 'string'
+          format: uuid
+          description: The unique identifier for the bill generated by AccountingSuite. This one is used for API purposes. This is different from the "BillNumber" property, which is also an unique identifier for the bill, but can be changed.
+          example: '5e891e00-bcb6-467d-b0fa-1aaf5956f2a8'
+        LastModifiedDate:
+          type: 'string'
+          format: 'date-time'
+          description: Date and time in UTC of the last change of the bill, in ISO 8601 format. Attribute is filled automatically.
+          example: '2018-01-01T11:00:00Z'
+        Status:
+          type: 'string'
+          description: Bill Status
+          enum:
+          - Deleted
+          - Draft
+          - Paid
+          - Open
+          - PartiallyPaid
+          - NoCharge
+          example: "Draft"
+        Date:
+          type: 'string'
+          format: 'date-time'
+          description: Date and time in UTC when the bill was created, in ISO 8601 format. Attribute is populated automatically with current date by the data service if not supplied.
+          example: 2018-01-01T11:00:00-07:00Z        
+        DeliveryDate:
+          type: 'string'
+          format: 'date-time' 
+          description: Date and time in UTC when the items should be delivered, in ISO 8601 format.     
+          example: '2018-01-09T12:00:00-07:00Z'
+        DueDate:
+          type: 'string'
+          format: 'date-time'
+          description: Date and time in UTC when the payment of the transaction is due, in ISO 8601 format. If date is not provided, the number of days specified in Terms for the Customer added the transaction date will be used.      
+          example: '2018-02-08T12:00:00-07:00Z'
+        Currency:
+          $ref: "#/components/schemas/CurrencyRef"
+        BillingAddress:
+          $ref: "#/components/schemas/Address"
+        Vendor:
+          $ref: "#/components/schemas/CompanyRef"
+        LineItems:
+          type: array
+          items:
+            $ref: "#/components/schemas/InvoiceLineItem"
+        Location:
+          $ref: "#/components/schemas/LocationRef"
+        TotalAmount:
+          type: number
+          example: 99.90
+        URL:
+          type: string
+          description: URL link to a source Document 
+          example: https://apps7.accountingsuite.com/a/1103018/#e1cib/data/Document.PurchaseInvoice?ref=80db0cc47ac0d6e311e8ccb441a651a6
+
+    Company:
+      type: object
+      required:
+      - "Name"
+      properties:
+        ID:
+          type: 'string'
+          description: 'The unique identifier generated by AccountingSuite.'
+          example: '96166ed6-dc57-4439-95a0-c27290ad62f3'
+        Name:
+          type: 'string'
+          description: 'Full name of contact / organisation.'
+          example: 'Jane Thompson'
+        Code:
+          type: 'string'
+          description: 'Company code'
+          example: '1016'          
+        LastModifiedDate:
+          type: 'string'
+          format: 'date-time'
+          example: '2018-01-01T11:00:00Z'
+          description: 'Date and time in UTC of the last change of the Company, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. Attribute is filled automatically.'
+        BillingAddress:
+          $ref: "#/components/schemas/Address"
+        ShippingAddress:
+          $ref: "#/components/schemas/Address" 
+        DefaultCurrency:
+          $ref: "#/components/schemas/CurrencyRef"
+        Notes:
+          type: 'string'
+          description: 'Free form text describing the Company.'
+          example: 'Has no debts'
+        Website:
+          type: 'string'
+          description: 'Website address.'
+          example: 'example.com'
+        IsCustomer:
+          type: 'boolean'
+          default: false
+          example: true
+        IsVendor:
+          type: 'boolean'
+          default: false
+          example: false
+        Taxable:
+          type: 'boolean'
+          description: 'If true, transactions for this customer are taxable.'
+          example: true
+          default: true
+        URL:
+          type: string
+          description: URL link to a source Company 
+          example: https://apps7.accountingsuite.com/a/1103018/#e1cib/data/Catalog.Companies?ref=80db0cc47ac0d6e311e8cae1b493be2b
+
+    CompanyRef:
+      type: object
+      properties:
+        ID:
+          type: 'string'
+          description: 'The unique identifier generated by AccountingSuite.'
+          example: '96166ed6-dc57-4439-95a0-c27290ad62f3'
+        Name:
+          type: 'string'
+          description: 'Full name of contact / organisation.'
+          example: 'Jane Thompson'
+        Code:
+          type: 'string'
+          description: 'Company code'
+          example: '1016'             
+
+    Currency:
+      type: object
+      properties:
+        ID:
+          type: 'string'
+          description: 'The unique identifier generated by AccountingSuite.'
+          example: '96166ed6-dc57-4439-95a0-c27290ad62f3'      
+        Code:
+          type: 'string'
+          example: 'USD'
+          description: 'The three letter code in [ISO 4217](https://en.wikipedia.org/wiki/ISO_8601) format for the currency.'
+        Name:
+          type: 'string'
+          example: 'US Dollar'
+        LastModifiedDate:
+          type: 'string'
+          format: 'date-time'
+          example: '2018-01-01T11:00:00Z'
+          description: 'Date and time in UTC of the last change of the Currency, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. Attribute is filled automatically.'
+
+    CurrencyRef:
+      type: object
+      properties:
+        ID:
+          type: 'string'
+          description: 'The unique identifier generated by AccountingSuite.'
+          example: '96166ed6-dc57-4439-95a0-c27290ad62f3'      
+        Code:
+          type: 'string'
+          example: 'USD'
+          description: 'The three letter code in [ISO 4217](https://en.wikipedia.org/wiki/ISO_8601) format for the currency.'
+        Name:
+          type: 'string'
+          example: 'US Dollar'
+
+    Invoice:
+      type: "object"
+      properties:
+        InvoiceNumber:
+          type: 'string'
+          description: The "InvoiceNumber" attribute is populated automatically if not supplied
+          example: '1001'
+        ID:
+          type: 'string'
+          format: uuid
+          description: The unique identifier for the invoice generated by AccountingSuite. This one is used for API purposes. This is different from the "InvoiceNumber" property, which is also an unique identifier for the invoice, but can be changed.
+          example: '5e891e00-bcb6-467d-b0fa-1aaf5956f2a8'
+        LastModifiedDate:
+          type: 'string'
+          format: 'date-time'
+          description: Date and time in UTC of the last change of the invoice, in ISO 8601 format. Attribute is filled automatically.
+          example: '2018-01-01T11:00:00Z'
+        Status:
+          type: 'string'
+          description: Invoice Status
+          enum:
+          - Deleted
+          - Draft
+          - Paid
+          - Open
+          - PartiallyPaid
+          - NoCharge
+          example: "Draft"
+        Date:
+          type: 'string'
+          format: 'date-time'
+          description: Date and time in UTC when the invoice was created, in ISO 8601 format. Attribute is populated automatically with current date by the data service if not supplied.
+          example: 2018-01-01T11:00:00-07:00Z        
+        DeliveryDate:
+          type: 'string'
+          format: 'date-time' 
+          description: Date and time in UTC when the items should be delivered, in ISO 8601 format.     
+          example: '2018-01-09T12:00:00-07:00Z'
+        DueDate:
+          type: 'string'
+          format: 'date-time'
+          description: Date and time in UTC when the payment of the transaction is due, in ISO 8601 format. If date is not provided, the number of days specified in Terms for the Customer added the transaction date will be used.      
+          example: '2018-02-08T12:00:00-07:00Z'
+        Currency:
+          $ref: "#/components/schemas/CurrencyRef"
+        BillingAddress:
+          $ref: "#/components/schemas/Address"
+        ShippingAddress:
+          $ref: "#/components/schemas/Address"
+        Customer:
+          $ref: "#/components/schemas/CompanyRef"
+        LineItems:
+          type: array
+          items:
+            $ref: "#/components/schemas/InvoiceLineItem"
+        Location:
+          $ref: "#/components/schemas/LocationRef"
+        URL:
+          type: string
+          description: URL link to a source Document 
+          example: https://apps7.accountingsuite.com/a/1103018/#e1cib/data/Document.SalesInvoice?ref=80db0cc47ac0d6e311e8d08c2d9b18f1
+
+    InvoiceLineItem:
+      type: object
+      properties:
+        Item:
+          $ref: "#/components/schemas/ItemRef"
+        Description:
+          type: string
+          description: 'Free form text description of the line item that appears in the print forms.'
+          example: 'entrenching shovel'
+        Quantity:
+          type: number
+          example: 15
+        Price:
+          type: number
+          example: 99.90
+        TotalAmount:
+          type: number
+          example: 1487.60
+
+    Item:
+      type: object
+      required:
+      - "Name"    
+      properties:    
+        ID:
+          type: 'string'
+          example: '72ccd3b1-194f-4e5e-b004-1e2b1d328689'
+        Name:
+          type: 'string'
+          example: 'Pillow'
+        LastModifiedDate:
+          type: 'string'
+          format: 'date-time'
+          example: '2018-01-01T11:00:00Z'
+          description: 'Date and time in UTC of the last change of the Item, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. Attribute is filled automatically.'
+        SKU:
+          type: 'string'
+          example: '654321'
+        Type:
+          type: 'string'
+          description: "Item type"
+          enum:
+          - "inventory"
+          - "service"
+          default: 'inventory'
+        Taxable:
+          type: boolean
+          description: 'If true, transactions for this item are taxable. If not specified, value is filled according to "Quick menu" - "Settings" - "Sales settings" - "Mark all new products taxable" setting.'
+        Status:
+          type: string
+          enum: 
+          - "active"
+          - "inactive"
+          default: 'active'
+        PreferredVendor:
+          $ref: "#/components/schemas/CompanyRef"
+        IncomeAccount:
+          $ref: "#/components/schemas/AccountRef"
+        ExpenseAccount:
+          $ref: "#/components/schemas/AccountRef"
+        InventoryAccount:
+          $ref: "#/components/schemas/AccountRef"
+        Price:
+          type: number
+          description: 'Price of an item.'
+          example: 99.99
+        URL:
+          type: string
+          description: URL link to a source Item 
+          example: https://apps7.accountingsuite.com/a/1103018/#e1cib/data/Catalog.Products?ref=80d80cc47ac0d6e311e7fc4ff2a82fb7
+
+    ItemRef:
+      type: object
+      properties:    
+        ID:
+          type: 'string'
+          example: '72ccd3b1-194f-4e5e-b004-1e2b1d328689'
+        Name:
+          type: 'string'
+          example: 'Pillow'
+        SKU:
+          type: 'string'
+          example: '654321'
+          
+    Location:
+      type: object
+      required:
+      - "Name"
+      properties:
+        ID:
+          type: 'string'
+          description: 'The unique identifier generated by AccountingSuite.'
+          example: 'c946323e-cbca-499e-a054-9029112255e7'
+        Name:
+          type: string
+          example: 'main warehouse'
+        LastModifiedDate:
+          type: 'string'
+          format: 'date-time'
+          example: '2018-01-01T11:00:00Z'
+          description: 'Date and time in UTC of the last change of the Location, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. Attribute is filled automatically.'        
+        URL:
+          type: string
+          description: URL link to a source Location 
+          example: https://apps7.accountingsuite.com/a/1103018/#e1cib/data/Catalog.Locations?ref=80d80cc47ac0d6e311e7fc4ff2a82fb7
+
+    LocationRef:
+      type: object
+      properties:
+        ID:
+          type: 'string'
+          description: 'The unique identifier generated by AccountingSuite.'
+          example: 'c946323e-cbca-499e-a054-9029112255e7'
+        Name:
+          type: string
+          example: 'main warehouse'
+
+
